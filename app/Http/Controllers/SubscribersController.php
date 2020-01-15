@@ -23,7 +23,7 @@ class SubscribersController extends Controller
     {
         $subscribers = QueryBuilder::for(Subscriber::class)
             ->with('fields')
-            ->allowedSorts('id', 'name', 'email')
+            ->allowedSorts('id', 'name', 'email', 'date_subscribe')
             ->allowedFilters([
                 AllowedFilter::custom('search', new SearchSubscribersFilter)->ignore(null, 'null'),
                 AllowedFilter::custom('state', new SubscribersByStateFilter)->ignore(null, 'null'),
