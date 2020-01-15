@@ -20,8 +20,8 @@ class SubscriberResource extends JsonResource
             'email' => $this->email,
             'state' => $this->state->key,
             'fields' => SubscriberFieldResource::collection($this->fields),
-            'date_subscribe' => optional($this->date_subscribe)->toDateString(),
-            'date_unsubscribe' => optional($this->date_unsubscribe)->toDateString(),
+            'date_subscribe' => optional($this->date_subscribe)->toDateTimeString(),
+            'date_unsubscribe' => optional($this->date_unsubscribe)->toDateTimeString(),
             'date_updated' => $this->updated_at->toDateTimeString(),
             'date_created' => $this->created_at->toDateTimeString(),
         ];

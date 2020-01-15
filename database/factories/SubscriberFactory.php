@@ -6,15 +6,29 @@ use App\Enums\SubscriberState;
 use App\Subscriber;
 use App\SubscriberField;
 use Faker\Generator as Faker;
+use Illuminate\Support\Carbon;
 
 $factory->define(Subscriber::class, function (Faker $faker) {
+    // temporarily disable events (we need to manually set the date_subscribe and date_unsubscribe)
+    Subscriber::unsetEventDispatcher();
+
+    $state = collect([
+        SubscriberState::Active(),
+        SubscriberState::Unsubscribed(),
+        SubscriberState::Unconfirmed()
+    ])->random();
+
+    $dateSubscribed = Carbon::now()->subMinutes(mt_rand(1, 60*24*30));
+
     return [
         'user_id' => auth()->user()->id ?? factory(App\User::class),
         'email' => $faker->unique()->safeEmail,
         'name' => $faker->name,
-        'state' => SubscriberState::getRandomValue(),
-        'date_subscribe' => null,
-        'date_unsubscribe' => null,
+        'state' => $state->value,
+        'date_subscribe' => $dateSubscribed,
+        'date_unsubscribe' => $state->is(SubscriberState::Unsubscribed()) 
+            ? (clone $dateSubscribed)->addMinutes(mt_rand(1, 60*24))
+            : null,
     ];
 });
 
