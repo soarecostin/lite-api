@@ -43,7 +43,7 @@ class SubscriberGetTest extends ApiTestCase
         $subscriber = factory(Subscriber::class)->states('with_fields')->create([
             'user_id' => $this->user->id,
             'name' => 'Costin Soare',
-            'email' => 'soarecostin@gmail.com',
+            'email' => 'demo@example.com',
         ]);
 
         $response = $this->actingAs($this->user)
@@ -55,6 +55,6 @@ class SubscriberGetTest extends ApiTestCase
 
         $dbSubscriber = Subscriber::find($response->json('data.id'));
         $this->assertEquals('Costin Soare', $dbSubscriber->name);
-        $this->assertEquals('soarecostin@gmail.com', $dbSubscriber->email);
+        $this->assertEquals('demo@example.com', $dbSubscriber->email);
     }
 }
