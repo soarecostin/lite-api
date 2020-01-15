@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TokensController;
 use Illuminate\Http\Request;
 
 /*
@@ -13,6 +14,19 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('auth/register', 'RegisterController@register');
+Route::post('auth/login', 'AuthController@login')->name('login');
+
+Route::middleware('auth:api,airlock')->group(function () {
+    Route::post('auth/logout', 'AuthController@logout');
+    Route::post('auth/refresh', 'AuthController@refresh');
+    Route::get('auth/me', 'AuthController@me');
+
+    Route::get('field-types', 'FieldTypesController@index');
+    Route::apiResource('fields', 'FieldsController');
+    Route::apiResource('subscribers', 'SubscribersController');
+
+    Route::get('/tokens', 'TokensController@index');
+    Route::post('/tokens', 'TokensController@store');
+    Route::delete('/tokens/{token}', 'TokensController@destroy');
 });

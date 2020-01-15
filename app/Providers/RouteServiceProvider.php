@@ -30,7 +30,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Route::model('token', \Laravel\Airlock\PersonalAccessToken::class);
 
         parent::boot();
     }
