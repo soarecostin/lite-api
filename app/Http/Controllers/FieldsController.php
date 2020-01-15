@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Field;
 use App\Actions\SaveField;
+use App\Field;
 use App\Http\Requests\StoreField;
 use App\Http\Requests\UpdateField;
 use App\Http\Resources\FieldResource;
@@ -31,6 +31,7 @@ class FieldsController extends Controller
     {
         $field = new Field();
         $saveField->execute($request, $field);
+
         return new FieldResource($field);
     }
 
@@ -56,6 +57,7 @@ class FieldsController extends Controller
     public function update(UpdateField $request, SaveField $saveField, Field $field)
     {
         $saveField->execute($request, $field);
+
         return new FieldResource($field);
     }
 
@@ -71,6 +73,7 @@ class FieldsController extends Controller
         $field->subscribers()->detach();
 
         $field->delete();
+
         return response()->json(null);
     }
 }

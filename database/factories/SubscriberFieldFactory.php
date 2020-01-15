@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(SubscriberField::class, function (Faker $faker) {
     return [
-        'value' => $faker->word
+        'value' => $faker->word,
     ];
 });
 

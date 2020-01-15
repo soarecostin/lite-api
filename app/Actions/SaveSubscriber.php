@@ -22,7 +22,7 @@ class SaveSubscriber
 
     protected function requestFields(Request $request, Subscriber $subscriber)
     {
-        return is_null($subscriber->id) 
+        return is_null($subscriber->id)
                 ? $request->only(['name', 'email'])
                 : $request->only(['name']);
     }

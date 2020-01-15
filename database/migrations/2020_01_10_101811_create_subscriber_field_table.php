@@ -22,7 +22,7 @@ class CreateSubscriberFieldTable extends Migration
             $table->string('value')->nullable();
 
             $table->timestamps();
-     
+
             $table->foreign('subscriber_id')->references('id')->on('subscribers');
             $table->foreign('field_id')->references('id')->on('fields');
 

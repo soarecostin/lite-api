@@ -17,11 +17,11 @@ class CreateFieldsTable extends Migration
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('user_id');
-            
+
             $table->string('title');
             $table->string('key');
             $table->tinyInteger('type');
-            
+
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

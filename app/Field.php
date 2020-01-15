@@ -15,15 +15,15 @@ class Field extends Model
 {
     use CastsEnums;
 
-    /** 
+    /**
      * Map attribute names to enum classes.
-     * 
+     *
      * @var array
      */
     protected $enumCasts = [
         'type' => FieldType::class,
     ];
-    
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -39,7 +39,7 @@ class Field extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'type'
+        'title', 'type',
     ];
 
     /**
@@ -74,7 +74,7 @@ class Field extends Model
                     ->withPivot('value')
                     ->withTimestamps();
     }
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);

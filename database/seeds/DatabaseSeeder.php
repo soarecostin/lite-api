@@ -18,44 +18,44 @@ class DatabaseSeeder extends Seeder
     {
         $user = factory(User::class)->create([
             'email' => 'soarecostin@gmail.com',
-            'password' => Hash::make('password')
+            'password' => Hash::make('password'),
         ]);
 
         factory(Field::class)->create([
             'user_id' => $user->id,
             'title' => 'Last name',
             'key' => 'last_name',
-            'type' => FieldType::TEXT()
+            'type' => FieldType::TEXT(),
         ]);
         factory(Field::class)->create([
             'user_id' => $user->id,
             'title' => 'Company',
             'key' => 'company',
-            'type' => FieldType::TEXT()
+            'type' => FieldType::TEXT(),
         ]);
         factory(Field::class)->create([
             'user_id' => $user->id,
             'title' => 'Country',
             'key' => 'country',
-            'type' => FieldType::TEXT()
+            'type' => FieldType::TEXT(),
         ]);
         factory(Field::class)->create([
             'user_id' => $user->id,
             'title' => 'Age',
             'key' => 'age',
-            'type' => FieldType::NUMBER()
+            'type' => FieldType::NUMBER(),
         ]);
         factory(Field::class)->create([
             'user_id' => $user->id,
             'title' => 'Date of birth',
             'key' => 'date_of_birth',
-            'type' => FieldType::DATE()
+            'type' => FieldType::DATE(),
         ]);
         factory(Field::class)->create([
             'user_id' => $user->id,
             'title' => 'Daily newsletter',
             'key' => 'daily_newsletter',
-            'type' => FieldType::BOOLEAN()
+            'type' => FieldType::BOOLEAN(),
         ]);
 
         factory(Subscriber::class, 50)->states('with_fields')->create([

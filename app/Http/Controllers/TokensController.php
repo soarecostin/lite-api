@@ -29,7 +29,7 @@ class TokensController extends Controller
         $token = $request->user()->createToken($request->input('note'));
 
         return response()->json([
-            'token' => $token->plainTextToken
+            'token' => $token->plainTextToken,
         ]);
     }
 
@@ -42,6 +42,7 @@ class TokensController extends Controller
     public function destroy(PersonalAccessToken $token)
     {
         $token->delete();
+
         return response()->json(null);
     }
 }

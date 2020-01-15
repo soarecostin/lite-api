@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\TokensController;
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes

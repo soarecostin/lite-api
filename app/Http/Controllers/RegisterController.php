@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -61,7 +60,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
-    
+
     /**
      * Handle a registration request for the application.
      *
@@ -74,14 +73,14 @@ class RegisterController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => $validator->errors()->first()
+                'message' => $validator->errors()->first(),
             ], 401);
         }
 
         event(new Registered($user = $this->create($request->all())));
 
         return response()->json([
-            'success' => true
-        ]); 
+            'success' => true,
+        ]);
     }
 }

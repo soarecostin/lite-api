@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\Enums\SubscriberState;
 use App\Subscriber;
 use App\SubscriberField;
 use Faker\Generator as Faker;
-use App\Enums\SubscriberState;
 
 $factory->define(Subscriber::class, function (Faker $faker) {
     return [
@@ -26,7 +26,7 @@ $factory->state(Subscriber::class, 'with_fields', [])
                     ->states(strtolower($field->type->key))
                     ->create([
                         'subscriber_id' => $subscriber->id,
-                        'field_id' => $field->id
+                        'field_id' => $field->id,
                     ]);
             });
         });

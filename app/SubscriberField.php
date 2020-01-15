@@ -22,7 +22,7 @@ class SubscriberField extends Pivot
      * @var array
      */
     protected $fillable = [
-        'value'
+        'value',
     ];
 
     public function subscriber()
@@ -40,6 +40,7 @@ class SubscriberField extends Pivot
         if ($this->field->type == FieldType::BOOLEAN()) {
             return (bool) $value;
         }
+
         return $value;
     }
 }

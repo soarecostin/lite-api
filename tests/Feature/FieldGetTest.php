@@ -22,7 +22,7 @@ class FieldGetTest extends ApiTestCase
     public function testGetAllFields()
     {
         $fields = factory(Field::class, 10)->create([
-            'user_id' => $this->user->id
+            'user_id' => $this->user->id,
         ]);
 
         $response = $this->actingAs($this->user)
@@ -36,18 +36,18 @@ class FieldGetTest extends ApiTestCase
             'user_id' => $this->user->id,
             'title' => 'Surname',
             'key' => 'surname',
-            'type' => FieldType::TEXT()
+            'type' => FieldType::TEXT(),
         ]);
-        
+
         $response = $this->actingAs($this->user)
-                        ->getJson('/api/fields/' . $field->id);
+                        ->getJson('/api/fields/'.$field->id);
 
         $response->assertStatus(200);
         $response->assertResource(new FieldResource($field));
         $this->assertDatabaseHas('fields', [
-            'key' => 'surname'
+            'key' => 'surname',
         ]);
-        
+
         $dbField = Field::find($response->json('data.id'));
         $this->assertEquals(FieldType::TEXT(), $dbField->type);
     }

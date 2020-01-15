@@ -44,6 +44,7 @@ class SubscribersController extends Controller
     {
         $subscriber = new Subscriber();
         $saveSubscriber->execute($request, $subscriber);
+
         return new SubscriberResource($subscriber);
     }
 
@@ -69,6 +70,7 @@ class SubscribersController extends Controller
     public function update(UpdateSubscriber $request, SaveSubscriber $saveSubscriber, Subscriber $subscriber)
     {
         $saveSubscriber->execute($request, $subscriber);
+
         return new SubscriberResource($subscriber);
     }
 
@@ -82,9 +84,9 @@ class SubscribersController extends Controller
     {
         // Remove all fields
         $subscriber->fields()->detach();
-        
+
         $subscriber->delete();
-        
+
         return response()->json(null);
     }
 }
