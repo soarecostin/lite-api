@@ -66,7 +66,6 @@ class SubscriberPutTest extends ApiTestCase
                 'email' => 'johndoe@mailerlite.com', // verify email cannot be changed
             ]);
 
-
         $updatedSubscriber = Subscriber::find($response->json('data.id'));
         $response->assertStatus(200);
         $response->assertResource(new SubscriberResource($subscriber));

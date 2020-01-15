@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Enums\FieldType;
 use App\Enums\SubscriberState;
 use App\Field;
 use App\Http\Resources\SubscriberResource;
