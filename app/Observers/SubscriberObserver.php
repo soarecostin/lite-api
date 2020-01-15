@@ -24,6 +24,6 @@ class SubscriberObserver
             if ($subscriber->state->is(SubscriberState::Unsubscribed())) {
                 $subscriber->date_unsubscribe = Carbon::now();
             }
-        }    
+        }
     }
 }
