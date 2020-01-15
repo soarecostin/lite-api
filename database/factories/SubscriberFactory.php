@@ -15,10 +15,10 @@ $factory->define(Subscriber::class, function (Faker $faker) {
     $state = collect([
         SubscriberState::Active(),
         SubscriberState::Unsubscribed(),
-        SubscriberState::Unconfirmed()
+        SubscriberState::Unconfirmed(),
     ])->random();
 
-    $dateSubscribed = Carbon::now()->subMinutes(mt_rand(1, 60*24*30));
+    $dateSubscribed = Carbon::now()->subMinutes(mt_rand(1, 60 * 24 * 30));
 
     return [
         'user_id' => auth()->user()->id ?? factory(App\User::class),
@@ -26,8 +26,8 @@ $factory->define(Subscriber::class, function (Faker $faker) {
         'name' => $faker->name,
         'state' => $state->value,
         'date_subscribe' => $dateSubscribed,
-        'date_unsubscribe' => $state->is(SubscriberState::Unsubscribed()) 
-            ? (clone $dateSubscribed)->addMinutes(mt_rand(1, 60*24))
+        'date_unsubscribe' => $state->is(SubscriberState::Unsubscribed())
+            ? (clone $dateSubscribed)->addMinutes(mt_rand(1, 60 * 24))
             : null,
     ];
 });
