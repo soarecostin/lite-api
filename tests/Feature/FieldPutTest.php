@@ -21,11 +21,11 @@ class FieldPutTest extends ApiTestCase
             'user_id' => $this->user->id,
             'title' => 'Surname',
             'key' => 'surname',
-            'type' => FieldType::TEXT()
+            'type' => FieldType::TEXT(),
         ]);
 
         $response = $this->actingAs($this->user)
-                        ->putJson('/api/fields/' . $field->id, $invalidData);
+                        ->putJson('/api/fields/'.$field->id, $invalidData);
 
         $response->assertStatus(422);
         $response->assertJsonValidationErrors([$invalidParameter]);
@@ -39,27 +39,27 @@ class FieldPutTest extends ApiTestCase
             [['title' => []], 'title'],
         ];
     }
-    
+
     public function testSuccessfulPut()
     {
         $field = factory(Field::class)->create([
             'user_id' => $this->user->id,
             'title' => 'Surname',
             'key' => 'surname',
-            'type' => FieldType::TEXT()
+            'type' => FieldType::TEXT(),
         ]);
 
         $response = $this->actingAs($this->user)
-            ->putJson('/api/fields/' . $field->id, [
+            ->putJson('/api/fields/'.$field->id, [
                 'title' => 'New field title',
                 'key' => 'something-else', // verify that it can't change key on update
-                'type' => FieldType::BOOLEAN() // verify that it can't change type on update
+                'type' => FieldType::BOOLEAN(), // verify that it can't change type on update
             ]);
 
         $field = Field::find($response->json('data.id'));
         $response->assertStatus(200);
         $response->assertResource(new FieldResource($field));
-        
+
         $this->assertEquals('New field title', $field->title);
         $this->assertEquals('surname', $field->key);
         $this->assertEquals(FieldType::TEXT(), $field->type);

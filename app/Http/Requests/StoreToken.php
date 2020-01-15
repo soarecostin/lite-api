@@ -14,7 +14,7 @@ class StoreToken extends FormRequest
     public function rules()
     {
         return [
-            'note' => 'required'
+            'note' => 'required',
         ];
     }
 }

@@ -53,12 +53,12 @@ class FieldPostTest extends ApiTestCase
         $field = Field::find($response->json('data.id'));
         $response->assertStatus(201);
         $response->assertResource(new FieldResource($field));
-        
+
         $this->assertEquals($fieldData['title'], $field->title);
         $this->assertEquals(Str::snake($fieldData['title']), $field->key);
         $this->assertEquals($fieldData['type'], $field->type->key);
     }
-    
+
     protected function getValidFieldData()
     {
         return [

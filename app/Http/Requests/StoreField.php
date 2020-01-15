@@ -20,7 +20,7 @@ class StoreField extends FormRequest
             'type' => [
                 'required',
                 new EnumKey(FieldType::class),
-            ]
+            ],
         ];
     }
 }

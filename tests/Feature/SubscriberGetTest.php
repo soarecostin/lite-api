@@ -22,13 +22,13 @@ class SubscriberGetTest extends ApiTestCase
     public function testItGetsAllSubscribers()
     {
         factory(Field::class, 10)->create([
-            'user_id' => $this->user->id
+            'user_id' => $this->user->id,
         ]);
 
         $subscribers = factory(Subscriber::class, 5)->states('with_fields')->create([
-            'user_id' => $this->user->id
+            'user_id' => $this->user->id,
         ]);
-        
+
         $response = $this->actingAs($this->user)
                         ->getJson('/api/subscribers');
         $response->assertResource(SubscriberResource::collection($subscribers));
@@ -37,7 +37,7 @@ class SubscriberGetTest extends ApiTestCase
     public function testItGetsSpecificSubscriberById()
     {
         factory(Field::class, 10)->create([
-            'user_id' => $this->user->id
+            'user_id' => $this->user->id,
         ]);
 
         $subscriber = factory(Subscriber::class)->states('with_fields')->create([
@@ -47,7 +47,7 @@ class SubscriberGetTest extends ApiTestCase
         ]);
 
         $response = $this->actingAs($this->user)
-                        ->getJson('/api/subscribers/' . $subscriber->id);
+                        ->getJson('/api/subscribers/'.$subscriber->id);
 
         $response->assertStatus(200);
 

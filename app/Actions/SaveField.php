@@ -2,8 +2,8 @@
 
 namespace App\Actions;
 
-use App\Field;
 use App\Enums\FieldType;
+use App\Field;
 use Illuminate\Http\Request;
 
 class SaveField

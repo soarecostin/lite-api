@@ -15,7 +15,7 @@ class CreateSubscribersTable extends Migration
     {
         Schema::create('subscribers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            
+
             $table->unsignedBigInteger('user_id');
 
             $table->string('email');
@@ -23,7 +23,7 @@ class CreateSubscribersTable extends Migration
             $table->tinyInteger('state');
             $table->dateTime('date_subscribe')->nullable();
             $table->dateTime('date_unsubscribe')->nullable();
-            
+
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

@@ -21,9 +21,9 @@ class UpdateSubscriber extends StoreSubscriber
                         'sometimes',
                         Rule::in([
                             SubscriberState::Active(),
-                            SubscriberState::Unsubscribed()
+                            SubscriberState::Unsubscribed(),
                         ]),
-                    ]
+                    ],
                 ])->all();
     }
 }

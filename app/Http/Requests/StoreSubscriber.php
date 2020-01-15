@@ -24,48 +24,48 @@ class StoreSubscriber extends FormRequest
                 'sometimes',
                 Rule::in([
                     SubscriberState::Active()->key,
-                    SubscriberState::Unconfirmed()->key, 
-                    SubscriberState::Unsubscribed()->key
+                    SubscriberState::Unconfirmed()->key,
+                    SubscriberState::Unsubscribed()->key,
                 ]),
-            ]
-        ])->merge(collect($this->input('fields'))->mapWithKeys(function($value, $fieldKey) {
+            ],
+        ])->merge(collect($this->input('fields'))->mapWithKeys(function ($value, $fieldKey) {
             $field = Field::where('key', $fieldKey)->first();
 
             return [
                 'fields.'.$fieldKey => [
                     'nullable',
-                    $this->fieldRules($field)
-                ]
+                    $this->fieldRules($field),
+                ],
             ];
         }))->all();
     }
 
     protected function fieldRules(Field $field)
     {
-        $methodName = 'get' . Str::studly($field->type->key) . 'FieldRules';
-        if (!$field || !method_exists($this, $methodName)) {
+        $methodName = 'get'.Str::studly($field->type->key).'FieldRules';
+        if (! $field || ! method_exists($this, $methodName)) {
             return;
         }
 
         return call_user_func([$this, $methodName]);
     }
 
-    protected function getDateFieldRules ()
+    protected function getDateFieldRules()
     {
         return 'date';
     }
 
-    protected function getNumberFieldRules ()
+    protected function getNumberFieldRules()
     {
         return 'numeric';
     }
 
-    protected function getBooleanFieldRules ()
+    protected function getBooleanFieldRules()
     {
         return 'boolean';
     }
 
-    protected function getTextFieldRules ()
+    protected function getTextFieldRules()
     {
         return 'string';
     }

@@ -17,7 +17,7 @@ class SubscriberFieldResource extends JsonResource
         return [
             'key' => $this->key,
             'value' => $this->pivot->value,
-            'type' => $this->type->key
+            'type' => $this->type->key,
         ];
     }
 }

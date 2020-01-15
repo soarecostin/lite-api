@@ -43,18 +43,18 @@ class SubscriberPostTest extends ApiTestCase
 
             [['name' => []], 'name'],
             [['name' => 1], 'name'],
-            
+
             [['state' => 'abc'], 'state'],
             [['state' => ''], 'state'],
             [['state' => []], 'state'],
             [['state' => 10], 'state'],
 
             [['fields' => ['surname'=>123]], 'fields.surname'],
-            
+
             [['fields' => ['date_of_birth'=>123]], 'fields.date_of_birth'],
             [['fields' => ['date_of_birth'=>'abc']], 'fields.date_of_birth'],
             [['fields' => ['date_of_birth'=>'07-1098-06']], 'fields.date_of_birth'],
-            
+
             [['fields' => ['age'=>'abc']], 'fields.age'],
             [['fields' => ['age'=>'1980-07-06']], 'fields.age'],
             [['fields' => ['age'=> []]], 'fields.age'],
@@ -67,7 +67,7 @@ class SubscriberPostTest extends ApiTestCase
     public function testSubscriberEmailUnique()
     {
         $this->createTestFields();
-        
+
         factory(Subscriber::class)->states('with_fields')->create([
             'user_id' => $this->user->id,
             'email' => 'johndoe@mailerlite.com',
@@ -81,7 +81,7 @@ class SubscriberPostTest extends ApiTestCase
                 'name' => 'John',
                 'state' => SubscriberState::Active()->key,
             ]);
-        
+
         $response->assertStatus(422);
         $response->assertJsonValidationErrors(['email']);
     }
@@ -97,13 +97,13 @@ class SubscriberPostTest extends ApiTestCase
         $subscriber = Subscriber::with('fields')->find($response->json('data.id'));
         $response->assertStatus(201);
         $response->assertResource(new SubscriberResource($subscriber));
-        
+
         $this->assertEquals($subscriberData['email'], $subscriber->email);
         $this->assertEquals($subscriberData['name'], $subscriber->name);
         $this->assertEquals($subscriberData['state'], $subscriber->state->key);
         $this->assertEquals(count($subscriberData['fields']), $subscriber->fields->count());
-        
-        collect($subscriberData['fields'])->each(function($value, $key) use ($subscriber) {
+
+        collect($subscriberData['fields'])->each(function ($value, $key) use ($subscriber) {
             $field = Field::where('key', $key)->first();
             $this->assertContains($field->id, $subscriber->fields->pluck('id')->all());
         });
@@ -120,28 +120,28 @@ class SubscriberPostTest extends ApiTestCase
             'user_id' => $this->user->id,
             'title' => 'Surname',
             'key' => 'surname',
-            'type' => FieldType::TEXT()
+            'type' => FieldType::TEXT(),
         ]);
 
         factory(Field::class)->create([
             'user_id' => $this->user->id,
             'title' => 'Date of birth',
             'key' => 'date_of_birth',
-            'type' => FieldType::DATE()
+            'type' => FieldType::DATE(),
         ]);
 
         factory(Field::class)->create([
             'user_id' => $this->user->id,
             'title' => 'Age',
             'key' => 'age',
-            'type' => FieldType::NUMBER()
+            'type' => FieldType::NUMBER(),
         ]);
 
         factory(Field::class)->create([
             'user_id' => $this->user->id,
             'title' => 'Terms',
             'key' => 'terms',
-            'type' => FieldType::BOOLEAN()
+            'type' => FieldType::BOOLEAN(),
         ]);
     }
 
@@ -153,11 +153,11 @@ class SubscriberPostTest extends ApiTestCase
             'name' => 'John',
             'state' => SubscriberState::Unconfirmed()->key,
             'fields' => [
-              'surname' => 'Doe',
-              'date_of_birth' => '1980-07-06',
-              'age' => 39,
-              'terms' => true
-            ]
+                'surname' => 'Doe',
+                'date_of_birth' => '1980-07-06',
+                'age' => 39,
+                'terms' => true,
+            ],
         ];
     }
 }

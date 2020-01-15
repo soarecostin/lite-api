@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\SubscriberFieldResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class SubscriberResource extends JsonResource

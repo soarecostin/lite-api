@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Enums\SubscriberState;
-use App\Field;
 use BenSampo\Enum\Traits\CastsEnums;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -15,9 +14,9 @@ class Subscriber extends Model
 {
     use CastsEnums;
 
-    /** 
+    /**
      * Map attribute names to enum classes.
-     * 
+     *
      * @var array
      */
     protected $enumCasts = [
@@ -32,7 +31,7 @@ class Subscriber extends Model
     protected $casts = [
         'state' => 'int',
     ];
-    
+
     /**
      * The attributes that should be mutated to dates.
      *
@@ -49,7 +48,7 @@ class Subscriber extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'email'
+        'name', 'email',
     ];
 
     /**
@@ -58,7 +57,7 @@ class Subscriber extends Model
      * @var array
      */
     protected $attributes = [
-        'state' => SubscriberState::Unconfirmed
+        'state' => SubscriberState::Unconfirmed,
     ];
 
     /**
@@ -92,12 +91,12 @@ class Subscriber extends Model
     {
         $fieldsKeys = collect($fieldsAsKeyValue)->keys()->all();
         $fields = Field::whereIn('key', $fieldsKeys)->get();
-        
+
         $subscriberFields = $fields->mapWithKeys(function ($field) use ($fieldsAsKeyValue) {
             return [
                 $field->id => [
-                    'value' => $fieldsAsKeyValue[$field->key]
-                ]
+                    'value' => $fieldsAsKeyValue[$field->key],
+                ],
             ];
         })->all();
 
