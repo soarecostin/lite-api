@@ -11,10 +11,17 @@ class SaveSubscriber
     public function execute(Request $request, Subscriber $subscriber)
     {
         $subscriber->fill($this->requestFields($request, $subscriber));
-        $subscriber->state = SubscriberState::coerce($request->input('state', 'Active'));
-        if (is_null($subscriber->id)) {
-            $subscriber->user_id = $request->user()->id;
+
+        if ($request->has('state')) {
+            $subscriber->state = SubscriberState::coerce($request->input('state'));
         }
+
+        if (is_null($subscriber->id)) {
+            // Create
+            $subscriber->user_id = $request->user()->id;
+            $subscriber->state = SubscriberState::coerce($request->input('state', 'Active'));
+        }
+
         $subscriber->save();
 
         $subscriber->saveFields($request->input('fields'));

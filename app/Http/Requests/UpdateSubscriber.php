@@ -20,8 +20,8 @@ class UpdateSubscriber extends StoreSubscriber
                     'state' => [
                         'sometimes',
                         Rule::in([
-                            SubscriberState::Active(),
-                            SubscriberState::Unsubscribed(),
+                            SubscriberState::Active()->key,
+                            SubscriberState::Unsubscribed()->key,
                         ]),
                     ],
                 ])->all();

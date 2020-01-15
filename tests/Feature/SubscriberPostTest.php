@@ -17,7 +17,7 @@ class SubscriberPostTest extends ApiTestCase
     /**
      * @dataProvider validationDataProvider
      */
-    public function testPostValidation(array $invalidData, string $invalidParameter)
+    public function testValidation(array $invalidData, string $invalidParameter)
     {
         $this->createTestFields();
 
@@ -112,37 +112,6 @@ class SubscriberPostTest extends ApiTestCase
         $this->assertEquals('1980-07-06', $subscriber->fields[1]->pivot->value);
         $this->assertEquals('39', $subscriber->fields[2]->pivot->value);
         $this->assertEquals(true, $subscriber->fields[3]->pivot->value);
-    }
-
-    protected function createTestFields()
-    {
-        factory(Field::class)->create([
-            'user_id' => $this->user->id,
-            'title' => 'Surname',
-            'key' => 'surname',
-            'type' => FieldType::TEXT(),
-        ]);
-
-        factory(Field::class)->create([
-            'user_id' => $this->user->id,
-            'title' => 'Date of birth',
-            'key' => 'date_of_birth',
-            'type' => FieldType::DATE(),
-        ]);
-
-        factory(Field::class)->create([
-            'user_id' => $this->user->id,
-            'title' => 'Age',
-            'key' => 'age',
-            'type' => FieldType::NUMBER(),
-        ]);
-
-        factory(Field::class)->create([
-            'user_id' => $this->user->id,
-            'title' => 'Terms',
-            'key' => 'terms',
-            'type' => FieldType::BOOLEAN(),
-        ]);
     }
 
     protected function getValidSubscriberData()
