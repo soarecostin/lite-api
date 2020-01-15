@@ -65,6 +65,6 @@
             "@php artisan key:generate --ansi"
         ],
         "test": "vendor/bin/phpunit",
-        "test-coverage": "phpunit --coverage-html coverage",
+        "test-coverage": "phpunit --coverage-html coverage"
     }
 }
