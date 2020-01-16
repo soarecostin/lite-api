@@ -68,7 +68,6 @@ class AuthTest extends TestCase
         ]);
     }
 
-    /*
     public function testLogout()
     {
         $user = factory(User::class)->create();
@@ -94,5 +93,4 @@ class AuthTest extends TestCase
                 'expires_in'
             ]);
     }
-    */
 }
