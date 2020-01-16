@@ -15,7 +15,7 @@ class SaveField
             // For new fields only, do not update on existing fields
             $field->key = $request->input('title');
             $field->type = FieldType::coerce($request->input('type'));
-            $field->user_id = $request->user()->id;
+            $field->user()->associate($request->user());
         }
         $field->save();
     }

@@ -18,7 +18,7 @@ class SaveSubscriber
 
         if (is_null($subscriber->id)) {
             // Create
-            $subscriber->user_id = $request->user()->id;
+            $subscriber->user()->associate($request->user());
             $subscriber->state = SubscriberState::coerce($request->input('state', 'Active'));
         }
 
