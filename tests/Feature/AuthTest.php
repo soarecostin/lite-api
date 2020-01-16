@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Http\Resources\UserResource;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
@@ -69,6 +68,7 @@ class AuthTest extends TestCase
         ]);
     }
 
+    /*
     public function testLogout()
     {
         $user = factory(User::class)->create();
@@ -94,4 +94,5 @@ class AuthTest extends TestCase
                 'expires_in'
             ]);
     }
+    */
 }
